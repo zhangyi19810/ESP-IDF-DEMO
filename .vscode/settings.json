@@ -14,5 +14,11 @@
     "ESP_ROM_ELF_DIR": "/home/ubuntu/.espressif/tools/esp-rom-elfs/20240305/"
   },
   "idf.gitPath": "/usr/bin/git",
-  "idf.flashType": "UART"
+  "idf.flashType": "UART",
+  "files.associations": {
+    "system.h": "c",
+    "bh1750.h": "c",
+    "bh1750_i2c.h": "c",
+    "cstdlib": "c"
+  }
 }
