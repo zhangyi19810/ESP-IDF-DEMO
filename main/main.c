@@ -4,6 +4,7 @@
 #define VOICE_CLK_IO_NUM                            GPIO_NUM_41             /*!< 语音时钟线IO */
 #define VOICE_SDA_IO_NUM                            GPIO_NUM_17             /*!< 语音时数据IO */
 #define VOICE_BUSY_IO_NUM                           GPIO_NUM_48             /*!< 语音时中断IO */
+#define BUZZER_IO_NUM                               GPIO_NUM_47             /*!< 蜂鸣器PWM IO引脚 */
 
 void voice_init(void)
 {
@@ -19,9 +20,9 @@ void voice_init(void)
     gpio_set_level(VOICE_CLK_IO_NUM, 1);
     gpio_set_level(VOICE_SDA_IO_NUM, 1);
 
-    Xl9535_Init();
-    Xl9535_Set_Io_Direction(PIN_P00, IO_OUTPUT);
-    Xl9535_Set_Io_Status(PIN_P00, IO_HIGH);
+    // Xl9535_Init();
+    // Xl9535_Set_Io_Direction(PIN_P00, IO_OUTPUT);
+    // Xl9535_Set_Io_Status(PIN_P00, IO_LOW);
 }
 
 void voice_send_data(uint8_t data)
@@ -54,8 +55,25 @@ void voice_send_data(uint8_t data)
 
 void app_main(void)
 {
+    gpio_config_t io_conf = {
+        .intr_type = GPIO_INTR_DISABLE,
+        .mode = GPIO_MODE_OUTPUT,
+        .pin_bit_mask = (1ULL << BUZZER_IO_NUM),
+        .pull_down_en = 0,
+        .pull_up_en = 0
+    };
+    gpio_config(&io_conf);
+    gpio_set_level(BUZZER_IO_NUM, 0);
+
     voice_init();
 
-    voice_send_data(0x08);
+    voice_send_data(0xE2);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    voice_send_data(8);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    voice_send_data(0xF1);
+    vTaskDelay(1000 / portTICK_PERIOD_MS);
+    
+    
     
 }
