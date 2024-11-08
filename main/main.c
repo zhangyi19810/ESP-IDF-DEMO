@@ -18,7 +18,7 @@ static const char *TAG = "i2c-example";
 #define ACK_VAL 0x0                             /*!< I2C ack value */
 #define NACK_VAL 0x1                            /*!< I2C nack value */
 
-#define BH1750_SLAVE_ADDR   0x23 // 从机地址
+#define BH1750_SLAVE_ADDR   0x23 // ��机地址
 #define BH1750_PWR_DOWN     0x00 // 关闭模块
 #define BH1750_PWR_ON       0x01 // 打开模块等待测量指令
 #define BH1750_RST          0x07 // 重置数据寄存器值在PowerOn模式下有效
@@ -162,9 +162,28 @@ static void i2c_test_task(void *arg)
     vSemaphoreDelete(print_mux);
     vTaskDelete(NULL);
 }
+#include "driver/ledc.h"
+#define BUZZER_IO_NUM                               (GPIO_NUM_47)             /*!< 蜂鸣器PWM IO引脚 */
+#define BUZZER_PWM_CHANNEL                           (0)                      /*!< 蜂鸣器PWM通道 */
+#define BUZZER_MODE                                 (LEDC_LOW_SPEED_MODE)    /*!< 蜂鸣器PWM模式 */
+#define BUZZER_TIMER                                 (LEDC_TIMER_0)            /*!< 蜂鸣器PWM定时器 */
 
 void app_main(void)
 {
+    gpio_reset_pin(BUZZER_IO_NUM);
+    ledc_channel_config_t buzzer_conf = {
+        .channel = BUZZER_PWM_CHANNEL,
+        .duty = 0,
+        .flags.output_invert = 0,
+        .gpio_num = BUZZER_IO_NUM,
+        .hpoint = 0,
+        .intr_type = LEDC_INTR_DISABLE,
+        .speed_mode = BUZZER_MODE,
+        .timer_sel = BUZZER_TIMER  // 10kHz定时器
+    };
+    ledc_channel_config(&buzzer_conf);
+
+    ledc_stop(BUZZER_MODE, BUZZER_PWM_CHANNEL, 0);
     print_mux = xSemaphoreCreateMutex();
     ESP_ERROR_CHECK(I2C_Init());
     xTaskCreate(i2c_test_task, "i2c_test_task", 1024 *4 , NULL, 10, NULL);
