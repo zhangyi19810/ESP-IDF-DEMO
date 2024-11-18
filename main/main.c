@@ -67,9 +67,9 @@ void app_main(void)
 
     voice_init();
 
-    voice_send_data(0xE2);
+    voice_send_data(0xEF);
     vTaskDelay(1000 / portTICK_PERIOD_MS);
-    voice_send_data(8);
+    voice_send_data(0x00);
     vTaskDelay(1000 / portTICK_PERIOD_MS);
     voice_send_data(0xF1);
     vTaskDelay(1000 / portTICK_PERIOD_MS);
