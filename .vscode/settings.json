@@ -4,7 +4,7 @@
   "idf.openOcdConfigs": [
     "board/esp32s3-builtin.cfg"
   ],
-  "idf.port": "/dev/ttyACM0",
+  "idf.port": "/dev/ttyUSB0",
   "idf.espIdfPath": "/home/ubuntu/esp/v5.3.1/esp-idf",
   "idf.pythonBinPath": "/home/ubuntu/.espressif/python_env/idf5.3_py3.12_env/bin/python",
   "idf.toolsPath": "/home/ubuntu/.espressif",
@@ -14,5 +14,14 @@
     "ESP_ROM_ELF_DIR": "/home/ubuntu/.espressif/tools/esp-rom-elfs/20240305/"
   },
   "idf.gitPath": "/usr/bin/git",
-  "idf.flashType": "UART"
+  "idf.flashType": "UART",
+  "files.associations": {
+    "xl9535.h": "c",
+    "my_system.h": "c",
+    "esp_netif.h": "c",
+    "task.h": "c",
+    "usb_stream.h": "c",
+    "esp_log.h": "c",
+    "camera.h": "c"
+  }
 }
