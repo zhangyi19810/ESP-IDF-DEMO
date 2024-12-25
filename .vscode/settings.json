@@ -19,6 +19,8 @@
     "system.h": "c",
     "bh1750.h": "c",
     "bh1750_i2c.h": "c",
-    "cstdlib": "c"
+    "cstdlib": "c",
+    "xl9535.h": "c",
+    "soc_caps.h": "c"
   }
 }

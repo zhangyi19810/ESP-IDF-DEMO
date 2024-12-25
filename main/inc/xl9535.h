@@ -4,18 +4,21 @@
 #include "esp_err.h"
 #include "driver/i2c.h"
 #include "driver/gpio.h"
+#include "soc/soc_caps.h"
 
 #define ACK_CHECK_EN 0x1                        
 #define ACK_CHECK_DIS 0x0                       
 #define ACK_VAL 0x0                             
-#define NACK_VAL 0x1                     
+#define NACK_VAL 0x1        
 
 /* XL9535 I2C配置 */
 #define XL9535_I2C_MASTER_SCL_IO          GPIO_NUM_7 /*!< XL9535 SCL引脚 */
 #define XL9535_I2C_MASTER_SDA_IO          GPIO_NUM_6 /*!< XL9535 SDA引脚 */
 #define XL9535_I2C_MASTER_FREQ_HZ         400000      /*!< I2C频率: 400kHz */
 #define XL9535_I2C_SLAVE_ADDR             0x20        /*!< XL9535从机地址 */
-#define XL9535_I2C_MASTER_NUM             I2C_NUM_0   /*!< 使用I2C_1 */
+
+#define XL9535_I2C_MASTER_NUM             LP_I2C_NUM_0   /*!< 使用I2C_0 */
+
 #define XL9535_INT_PIN                    GPIO_NUM_5  /*!< XL9535中断引脚 */
 
 /* 控制寄存器 （CMD）*/

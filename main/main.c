@@ -52,6 +52,12 @@ void app_main(void)
     gpio_config(&gpio_conf);
     gpio_set_level(DC_EN, 1);
 
+
+    // 初始化IO扩展板
+    Xl9535_Init();
+
+    
+#if 0
     print_mux = xSemaphoreCreateMutex();
     vTaskDelay(100 / portTICK_PERIOD_MS);
     
@@ -69,4 +75,5 @@ void app_main(void)
     vTaskDelay(100 / portTICK_PERIOD_MS);
     
     xTaskCreate(i2c_test_task, "i2c_test_task", 1024 * 4, NULL, 10, NULL);
+#endif
 }

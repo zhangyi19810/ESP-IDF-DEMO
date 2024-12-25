@@ -1,5 +1,6 @@
 #include "xl9535.h"
 #include "esp_log.h"
+#include "driver/i2c.h"
 
 static const char *TAG = "Xl9535";
 
