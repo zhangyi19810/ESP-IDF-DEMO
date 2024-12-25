@@ -9,9 +9,9 @@
 #include "driver/i2c.h"
 
 #define EN_GPIO          GPIO_NUM_1
-#define SEL_GPIO         PIN_P01     // sel引脚，用于切换摄像头
-#define USB_EN_GPIO      PIN_P02     // usb使能引脚
+
 #define OE_GPIO          PIN_P00     // oe
+#define SEL_GPIO         PIN_P01     // sel引脚，用于切换摄像头
 #define DC_EN_GPIO       PIN_P07     // dc使能引脚
 
 /* XL9535拓展IO IIC协议相关配置 */

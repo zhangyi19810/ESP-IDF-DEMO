@@ -1,18 +1,28 @@
 #include "system.h"
 #include "camera.h"
+#include "wifi.h"
 
 void app_main(void)
 {
     system_init();
     
+    // 初始化WiFi
+    ESP_LOGI("MAIN", "开始WiFi初始化...");
+    ESP_ERROR_CHECK(wifi_init_sta());
+      
     // 初始化摄像头1
     camera_init();
+
+    gpio_reset_pin(GPIO_NUM_12);
+    gpio_set_direction(GPIO_NUM_12, GPIO_MODE_OUTPUT);
     
-    // 切换到摄像头2
-    vTaskDelay(pdMS_TO_TICKS(1000));  // 等待1秒
-    camera_switch(CAM_SELECT_2);
-    
-    // 切回摄像头1
-    vTaskDelay(pdMS_TO_TICKS(1000));
-    camera_switch(CAM_SELECT_1);
+
+    while (1)
+    {
+        gpio_set_level(GPIO_NUM_12, 1);
+        vTaskDelay(pdMS_TO_TICKS(1000));
+        gpio_set_level(GPIO_NUM_12, 0);
+        vTaskDelay(pdMS_TO_TICKS(1000));
+    }
+      
 }
