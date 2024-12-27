@@ -17,7 +17,7 @@
 #define XL9535_I2C_MASTER_FREQ_HZ         400000      /*!< I2C频率: 400kHz */
 #define XL9535_I2C_SLAVE_ADDR             0x20        /*!< XL9535从机地址 */
 
-#define XL9535_I2C_MASTER_NUM             LP_I2C_NUM_0   /*!< 使用I2C_0 */
+#define XL9535_I2C_MASTER_NUM             I2C_NUM_0   /*!< 使用I2C_0 */
 
 #define XL9535_INT_PIN                    GPIO_NUM_5  /*!< XL9535中断引脚 */
 

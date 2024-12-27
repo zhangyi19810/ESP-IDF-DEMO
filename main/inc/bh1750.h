@@ -7,7 +7,7 @@
 
 // I2C配置相关宏定义
 #define I2C_MASTER_SCL_IO GPIO_NUM_8           /*!< gpio number for I2C master clock */
-#define I2C_MASTER_SDA_IO GPIO_NUM_3           /*!< gpio number for I2C master data  */
+#define I2C_MASTER_SDA_IO GPIO_NUM_6           /*!< gpio number for I2C master data  */
 #define I2C_MASTER_NUM 1                        /*!< I2C port number for master dev */
 #define I2C_MASTER_FREQ_HZ 50000               /*!< I2C master clock frequency */
 #define I2C_MASTER_TX_BUF_DISABLE 0             /*!< I2C master doesn't need buffer */

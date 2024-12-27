@@ -57,7 +57,7 @@ void app_main(void)
     Xl9535_Init();
 
     
-#if 0
+#if 1
     print_mux = xSemaphoreCreateMutex();
     vTaskDelay(100 / portTICK_PERIOD_MS);
     
