@@ -1,2 +1,4 @@
 .devcontainer/
 build/
+sdkconfig*
+!sdkconfig.defaults
