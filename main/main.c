@@ -6,9 +6,9 @@
 #include "driver/gpio.h"
 #include "esp_check.h"
 
-#define EXAMPLE_STD_BCLK_IO1 GPIO_NUM_1 // I2S bit clock io number   I2S_BCLK
-#define EXAMPLE_STD_WS_IO1 GPIO_NUM_3   // I2S word select io number    I2S_LRC
-#define EXAMPLE_STD_DOUT_IO1 GPIO_NUM_2 // I2S data out io number    I2S_DOUT
+#define EXAMPLE_STD_BCLK_IO1 GPIO_NUM_4 // I2S bit clock io number   I2S_BCLK
+#define EXAMPLE_STD_WS_IO1 GPIO_NUM_8   // I2S word select io number    I2S_LRC
+#define EXAMPLE_STD_DOUT_IO1 GPIO_NUM_7 // I2S data out io number    I2S_DOUT
 #define EXAMPLE_STD_DIN_IO1 GPIO_NUM_NC // I2S data in io number
 
 #define EXAMPLE_BUFF_SIZE 2048
@@ -82,6 +82,17 @@ static void i2s_example_init_std_simplex(void)
 
 void app_main(void)
 {
+    gpio_config_t io_conf = {
+        .pin_bit_mask = (1ULL << GPIO_NUM_47) | (1ULL << GPIO_NUM_10) | (1ULL << GPIO_NUM_9),
+        .mode = GPIO_MODE_OUTPUT,
+        .pull_up_en = GPIO_PULLUP_DISABLE,
+        .pull_down_en = GPIO_PULLDOWN_DISABLE,
+        .intr_type = GPIO_INTR_DISABLE,
+    };
+    gpio_config(&io_conf);
+    gpio_set_level(GPIO_NUM_47, 1);
+    gpio_set_level(GPIO_NUM_10, 1);
+    gpio_set_level(GPIO_NUM_9, 1);
     i2s_example_init_std_simplex();
 
     ESP_ERROR_CHECK(i2s_channel_enable(tx_chan));
