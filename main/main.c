@@ -6,9 +6,9 @@
 #include "driver/gpio.h"
 #include "esp_check.h"
 
-#define EXAMPLE_STD_BCLK_IO1 GPIO_NUM_4 // I2S bit clock io number   I2S_BCLK
-#define EXAMPLE_STD_WS_IO1 GPIO_NUM_8   // I2S word select io number    I2S_LRC
-#define EXAMPLE_STD_DOUT_IO1 GPIO_NUM_7 // I2S data out io number    I2S_DOUT
+#define EXAMPLE_STD_BCLK_IO1 GPIO_NUM_26 // I2S bit clock io number   I2S_BCLK
+#define EXAMPLE_STD_WS_IO1 GPIO_NUM_27   // I2S word select io number    I2S_LRC
+#define EXAMPLE_STD_DOUT_IO1 GPIO_NUM_19 // I2S data out io number    I2S_DOUT
 #define EXAMPLE_STD_DIN_IO1 GPIO_NUM_NC // I2S data in io number
 
 #define EXAMPLE_BUFF_SIZE 2048
@@ -45,7 +45,7 @@ static void i2s_example_write_task(void *args)
         for (int i = 0; i < EXAMPLE_BUFF_SIZE; i++)
         {
             offset++;
-            buffer[i] = pcm_start[offset] << 5;
+            buffer[i] = pcm_start[offset] << 1;
         }
         printf("size %d\noffset %lu\n", pcm_end - pcm_start, offset);
     }
@@ -83,16 +83,15 @@ static void i2s_example_init_std_simplex(void)
 void app_main(void)
 {
     gpio_config_t io_conf = {
-        .pin_bit_mask = (1ULL << GPIO_NUM_47) | (1ULL << GPIO_NUM_10) | (1ULL << GPIO_NUM_9),
+        .pin_bit_mask = (1ULL << GPIO_NUM_25) | (1ULL << GPIO_NUM_12),
         .mode = GPIO_MODE_OUTPUT,
         .pull_up_en = GPIO_PULLUP_DISABLE,
         .pull_down_en = GPIO_PULLDOWN_DISABLE,
         .intr_type = GPIO_INTR_DISABLE,
     };
     gpio_config(&io_conf);
-    gpio_set_level(GPIO_NUM_47, 1);
-    gpio_set_level(GPIO_NUM_10, 1);
-    gpio_set_level(GPIO_NUM_9, 1);
+    gpio_set_level(GPIO_NUM_25, 1);
+    gpio_set_level(GPIO_NUM_12, 1);
     i2s_example_init_std_simplex();
 
     ESP_ERROR_CHECK(i2s_channel_enable(tx_chan));
